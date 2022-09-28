@@ -9,7 +9,7 @@ auth_ns = Namespace('auth')
 join_ns = Namespace('join')
 
 
-@user_ns.route('/')
+@user_ns.route('/') # Получение пользователей
 class UserView(Resource):
     def get(self):
         return user_service.get_all()
@@ -20,7 +20,7 @@ class UserView(Resource):
         return user_service.get_one(uid)
 
 
-@auth_ns.route('/')
+@auth_ns.route('/') # Для получения токенов
 class UserView(Resource):
     def post(self):
         req_json = request.json
@@ -33,7 +33,7 @@ class UserView(Resource):
 
 
 
-@join_ns.route('/')
+@join_ns.route('/')  # Для добавления пользователей
 class UserView(Resource):
     def post(self):
         req_json = request.json
