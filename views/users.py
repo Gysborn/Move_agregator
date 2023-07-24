@@ -9,10 +9,11 @@ auth_ns = Namespace('auth')
 join_ns = Namespace('join')
 
 
-@user_ns.route('/') # Получение пользователей
+@user_ns.route('/')  # Получение пользователей
 class UserView(Resource):
     def get(self):
         return user_service.get_all()
+
 
 @user_ns.route('/<int:uid>')
 class UserView(Resource):
@@ -20,7 +21,7 @@ class UserView(Resource):
         return user_service.get_one(uid)
 
 
-@auth_ns.route('/') # Для получения токенов
+@auth_ns.route('/')  # Для получения токенов
 class UserView(Resource):
     def post(self):
         req_json = request.json
@@ -30,7 +31,6 @@ class UserView(Resource):
         req_json = request.json
         tokens = req_json.get("refresh_token")
         return user_service.approve_refresh_token(tokens)
-
 
 
 @join_ns.route('/')  # Для добавления пользователей
@@ -44,22 +44,16 @@ class UserView(Resource):
         return response
 
 
-
-
-
-
-@auth_ns.route('/')
-class UserView(Resource):
-    def put(self):
-        # res = user_service.get_all()
-        # #res = DirectorSchema(many=True).dump(rs)
-        # return res, 200
-        pass
+# @auth_ns.route('/')
+# class UserView(Resource):
+#     def put(self):
+#         res = user_service.get_all()
+#         # #res = DirectorSchema(many=True).dump(rs)
+#         return res, 200
 
 
 @user_ns.route('/')
 class UserView(Resource):
     def delete(self):
         res = user_service.get_all()
-        #res = DirectorSchema(many=True).dump(rs)
         return res, 200
